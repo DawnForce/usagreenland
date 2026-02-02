@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>USAGreenland.com — Total Access</title>
+    <meta name="description"
+        content="USAGreenland.com delivers Total Access to USA–Greenland news, travel guidance, business opportunities, and curated resources." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://usagreenland.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="USAGreenland.com" />
+    <meta property="og:title" content="USAGreenland.com — Total Access" />
+    <meta property="og:description"
+        content="News, travel, business, and practical guidance on the U.S.–Greenland relationship." />
+    <meta property="og:image" content="assets/og-default.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="USAGreenland.com — Total Access" />
+    <meta name="twitter:description"
+        content="News, travel, business and practical guidance—organized, updated, and easy to follow." />
+    <meta name="twitter:image" content="assets/og-default.jpg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Preload Hero -->
+    <link rel="preload" as="image" href="assets/hero-home.jpg" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header class="hero hero--home" role="banner">
+        <div class="hero__overlay" aria-hidden="true"></div>
+
+        <div class="hero__inner">
+            <div class="brand">
+                <h1 class="brand__title">USAGreenland.com</h1>
+                <p class="brand__tagline">Total Access</p>
+            </div>
+
+            <p class="hero__subhead">
+                News, travel, business and practical guidance—organized, updated, and easy to follow.
+            </p>
+
+            <div class="hero__cta">
+                <a class="btn btn--primary" href="news.html">See Latest Updates</a>
+                <a class="btn btn--ghost" href="#newsletter">Get the Weekly Brief</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav" aria-label="Primary navigation">
+        <div class="nav__inner">
+            <a class="nav__home" href="index.html" aria-label="USAGreenland Home">UG</a>
+
+            <ul class="nav__links">
+                <li><a href="news.html">News & Analysis</a></li>
+                <li><a href="travel.html">Travel Guide</a></li>
+                <li><a href="business.html">Business</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="premium.html">Premium</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- HOME CATEGORY TILES -->
+        <section class="section section--tiles" aria-label="Site sections">
+            <div class="container">
+                <div class="tiles tiles--bg">
+
+                    <a class="tile tile--news" href="news.html">
+                        <div class="tile__label">News & Analysis</div>
+                    </a>
+
+                    <a class="tile tile--travel" href="travel.html">
+                        <div class="tile__label">Travel Guide</div>
+                    </a>
+
+                    <a class="tile tile--business" href="business.html">
+                        <div class="tile__label">Business & Opportunities</div>
+                    </a>
+
+                    <a class="tile tile--shop" href="shop.html">
+                        <div class="tile__label">Shop</div>
+                    </a>
+
+                    <a class="tile tile--premium" href="premium.html">
+                        <div class="tile__label">Premium</div>
+                    </a>
+
+                    <a class="tile tile--about" href="about.html">
+                        <div class="tile__label">About / Contact</div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- LATEST UPDATES -->
+        <section class="section section--latest" aria-label="Latest updates">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Latest Updates</h2>
+                    <a class="textlink" href="news.html">All news →</a>
+                </div>
+
+                <!--
+                  CONTRACT (LOCKED):
+                  This region is script-owned by /data/render-news.js
+                  Do not hand-edit cards inside.
+                  Homepage displays curated "Latest" only.
+                -->
+                <div class="latest" id="homeLatest"></div>
+            </div>
+        </section>
+
+        <!-- NEWSLETTER -->
+        <section class="section section--newsletter" id="newsletter" aria-label="Newsletter signup">
+            <div class="container">
+                <div class="newsletter">
+                    <div>
+                        <h2>Weekly Brief</h2>
+                        <p>One email. The week’s key updates, cleanly summarized.</p>
+                    </div>
+
+                    <form class="newsletter__form" action="#" method="post">
+                        <label class="sr-only" for="email">Email</label>
+                        <input id="email" name="email" type="email" placeholder="you@domain.com" required />
+                        <button class="btn btn--primary" type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container footer__inner">
+            <p>© 2026 USAGreenland.com • Total Access</p>
+            <div class="footer__links">
+                <a href="about.html">Contact</a>
+                <a href="premium.html">Premium</a>
+                <a href="#newsletter">Newsletter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Homepage rendering (curated latest only) -->
+    <script type="module" src="data/render-news.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Premium scroll behavior: prevent footer flash on navigation -->
+    <script>
+        if ("scrollRestoration" in history) {
+            history.scrollRestoration = "manual";
+        }
+
+        const forceTop = () => window.scrollTo(0, 0);
+
+        // Earliest possible
+        forceTop();
+
+        // Covers BFCache restores
+        window.addEventListener("pageshow", forceTop);
+
+        // One-frame insurance against late layout / image shifts
+        requestAnimationFrame(forceTop);
+    </script>
+
+    <title>News & Analysis – USAGreenland.com</title>
+    <meta name="description" content="Latest USA–Greenland news with clean context and practical takeaways." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://usagreenland.com/news.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="USAGreenland.com" />
+    <meta property="og:title" content="News & Analysis – USAGreenland.com" />
+    <meta property="og:description" content="Latest USA–Greenland news with clean context and practical takeaways." />
+    <meta property="og:image" content="assets/og-default.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="News & Analysis – USAGreenland.com" />
+    <meta name="twitter:description" content="Latest USA–Greenland news with clean context and practical takeaways." />
+    <meta name="twitter:image" content="assets/og-default.jpg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Preload hero -->
+    <link rel="preload" as="image" href="assets/hero-news.jpg" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header class="hero hero--news" role="banner">
+        <div class="hero__overlay" aria-hidden="true"></div>
+
+        <div class="hero__inner">
+            <div class="brand">
+                <h1 class="brand__title">News & Analysis</h1>
+                <p class="brand__tagline">Total Access</p>
+            </div>
+
+            <p class="hero__subhead">
+                Latest U.S.–Greenland news with clean context and practical takeaways.
+            </p>
+
+            <div class="hero__cta">
+                <a class="btn btn--ghost" href="index.html">Back to Home</a>
+                <a class="btn btn--primary" href="#latest">Jump to Latest</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav" aria-label="Primary navigation">
+        <div class="nav__inner">
+            <a class="nav__home" href="index.html" aria-label="USAGreenland Home">UG</a>
+
+            <ul class="nav__links">
+                <li><a href="news.html" aria-current="page">News & Analysis</a></li>
+                <li><a href="travel.html">Travel Guide</a></li>
+                <li><a href="business.html">Business</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="premium.html">Premium</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main id="latest" class="section section--latest">
+        <div class="container">
+            <div class="section__head">
+                <h2>Latest News</h2>
+            </div>
+
+            <!--
+              CONTRACT (LOCKED):
+              - This region is script-owned by /data/render-news.js
+              - Do NOT hand-edit cards here
+              - Data source: /data/news-data.js (temporary presentation feed)
+              - This page renders the FULL news listing
+            -->
+            <div class="latest" id="newsGrid"></div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer__inner">
+            <p>&copy; 2026 USAGreenland.com — Total Access</p>
+        </div>
+    </footer>
+
+    <!-- News Renderer (Presentation Layer Only) -->
+    <script type="module" src="data/render-news.js"></script>
+
+</body>
+
+</html>

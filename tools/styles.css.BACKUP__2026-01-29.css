@@ -1,0 +1,1185 @@
+/* =========================================================
+   USAGreenland.com — styles.css (Single System)
+   Goals: fast, readable, consistent heroes, no conflicts.
+   ========================================================= */
+
+:root {
+  --navy: #001f3f;
+  --navy2: #061b2f;
+
+  --ice: #f2fbff;
+  --bg: linear-gradient(to bottom, var(--ice), #e8f4fb);
+
+  --ink: #0b1220;
+  /* ALWAYS dark text */
+  --muted: #47627a;
+
+  --accent: #1d7aa6;
+  --accent2: #0f5f88;
+
+  --card: rgba(255, 255, 255, .90);
+  --shadow: 0 10px 30px rgba(0, 0, 0, .14);
+
+  --radius: 18px;
+  --max: 1120px;
+  --gutter: 20px;
+
+  /* Consistent hero height everywhere */
+  --hero-min: 420px;
+
+  /* Hero overlay to keep titles readable on any photo */
+  --overlay-a: rgba(0, 10, 24, .70);
+  --overlay-b: rgba(0, 35, 60, .45);
+
+  --font-body: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-display: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* ------------------- base ------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+.brand__title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ------------------- hero ------------------- */
+
+.hero {
+  position: relative;
+  min-height: var(--hero-min);
+  display: flex;
+  align-items: center;
+
+  /* IMPORTANT: no rounding anywhere */
+  border-radius: 0;
+  overflow: visible;
+
+  background: url("assets/hero.jpg") center/cover no-repeat;
+  color: #fff;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--overlay-a), var(--overlay-b));
+}
+
+.hero__inner {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px var(--gutter) 44px;
+}
+
+.brand__title {
+  font-size: clamp(36px, 4.6vw, 60px);
+  line-height: 1.05;
+  margin: 0;
+  font-weight: 800;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.brand__tagline {
+  margin: 10px 0 0;
+  font-family: var(--font-display);
+
+  /* Bigger + more professional */
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: rgba(255, 255, 255, .92);
+}
+
+.hero__subhead {
+  max-width: 68ch;
+  margin: 14px 0 0;
+  font-size: clamp(15px, 1.7vw, 18px);
+  color: rgba(255, 255, 255, .92);
+}
+
+.hero__cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+/* ------------------- buttons ------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, .20);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  border-color: rgba(255, 255, 255, .12);
+}
+
+.btn--ghost {
+  background: rgba(255, 255, 255, .14);
+  color: white;
+}
+
+/* ------------------- nav ------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(0, 31, 63, .92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.nav__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 10px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav__home {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .10);
+  color: white;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.nav__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.nav__links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  opacity: .95;
+}
+
+.nav__links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ------------------- sections ------------------- */
+
+.section {
+  padding: 44px 0;
+}
+
+.section--tiles {
+  padding-top: 34px;
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.section__head h2 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--ink);
+  /* ensure never washed out */
+}
+
+.textlink {
+  color: var(--accent2);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.textlink:hover {
+  text-decoration: underline;
+}
+
+/* ------------------- tiles ------------------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.tile {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: block;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, .06);
+}
+
+.tile img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform .25s ease;
+}
+
+.tile:hover img {
+  transform: scale(1.05);
+}
+
+.tile__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px;
+  color: white;
+  font-weight: 900;
+  font-size: 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, .78), rgba(0, 0, 0, 0));
+  text-shadow: 0 8px 18px rgba(0, 0, 0, .35);
+}
+
+/* ------------------- latest cards ------------------- */
+
+.latest {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(0, 0, 0, .06);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+  padding: 16px;
+  overflow: hidden;
+  color: var(--ink);
+  /* hard lock readability */
+}
+
+.card__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+  background-color: rgba(0, 0, 0, .06);
+  /* placeholder fallback */
+}
+
+.card__kicker {
+  margin: 0;
+  color: var(--accent2);
+  font-weight: 900;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.card__title {
+  margin: 8px 0 6px;
+  font-size: 18px;
+  line-height: 1.25;
+  font-family: var(--font-display);
+  font-weight: 900;
+}
+
+.card__title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.card__title a:hover {
+  text-decoration: underline;
+}
+
+.card__meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ------------------- newsletter ------------------- */
+
+.newsletter {
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid rgba(0, 0, 0, .06);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--ink);
+}
+
+.newsletter h2 {
+  margin: 0;
+  color: var(--ink);
+}
+
+.newsletter p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.newsletter__form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsletter__form input {
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, .10);
+  min-width: 240px;
+}
+
+/* ------------------- footer ------------------- */
+
+.footer {
+  background: var(--navy);
+  color: white;
+  padding: 22px 0;
+  margin-top: 10px;
+}
+
+.footer__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------- focus + motion ------------------- */
+
+a:focus,
+button:focus,
+input:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ------------------- mobile baseline ------------------- */
+
+@media (max-width: 640px) {
+  :root {
+    --hero-min: 360px;
+    --gutter: 16px;
+  }
+
+  .hero__inner {
+    padding-top: 44px;
+    padding-bottom: 34px;
+  }
+
+  .nav__inner {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}
+
+/* Page-specific hero images */
+.hero--home {
+  background-image: url("assets/hero-home.jpg");
+}
+
+.hero--news {
+  background-image: url("assets/hero-news.jpg");
+}
+
+/* =========================
+   HOME TILES — background-image version
+   Paste at END of styles.css
+   ========================= */
+
+.tiles--bg .tile {
+  background-size: cover;
+  background-position: center;
+  min-height: 240px;
+  /* ensures card height even with no <img> */
+}
+
+/* Darken image slightly for label readability */
+.tiles--bg .tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, .08), rgba(0, 0, 0, .35));
+  z-index: 0;
+}
+
+.tiles--bg .tile__label {
+  z-index: 1;
+  /* sits above ::before */
+}
+
+/* Page tile images — swap URLs anytime */
+.tile--news {
+  background-image: url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1600&auto=format&fit=crop");
+}
+
+.tile--travel {
+  background-image: url("https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop");
+}
+
+.tile--business {
+  background-image: url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1600&auto=format&fit=crop");
+}
+
+.tile--shop {
+  background-image: url("https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=1600&auto=format&fit=crop");
+}
+
+.tile--premium {
+  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop");
+}
+
+.tile--about {
+  background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop");
+}
+
+/* =========================
+   PREMIUM HOVER INTERACTIONS
+   ========================= */
+
+/* Home tiles (background-image cards) */
+.tiles--bg .tile {
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.tiles--bg .tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+}
+
+/* Subtle image zoom effect using overlay layer */
+.tiles--bg .tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  transform: scale(1);
+  transition: transform .45s ease;
+}
+
+.tiles--bg .tile:hover::after {
+  transform: scale(1.06);
+}
+
+/* Editorial cards */
+.card {
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .18);
+}
+
+/* Card image zoom */
+.card__media {
+  transition: transform .45s ease;
+}
+
+.card:hover .card__media {
+  transform: scale(1.05);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  .tile,
+  .card,
+  .card__media {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================
+   MOBILE POLISH PASS — v1
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* HERO */
+  .hero {
+    min-height: 340px;
+  }
+
+  .hero__inner {
+    padding-top: 40px;
+    padding-bottom: 32px;
+    text-align: left;
+  }
+
+  .brand__title {
+    font-size: 32px;
+  }
+
+  .brand__tagline {
+    font-size: 13px;
+    letter-spacing: .12em;
+  }
+
+  .hero__subhead {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .hero__cta {
+    gap: 10px;
+  }
+
+  /* NAV */
+  .nav__links {
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  /* HOME TILE GRID */
+  .tiles {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tile img {
+    height: 200px;
+  }
+
+  .tile__label {
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  /* CARD GRIDS (News / Travel / Business / Shop) */
+  .latest {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .card__media {
+    aspect-ratio: 16 / 9;
+    margin-bottom: 10px;
+  }
+
+  .card__title {
+    font-size: 17px;
+  }
+
+  .card__meta {
+    font-size: 13px;
+  }
+
+  /* SECTION HEADERS */
+  .section {
+    padding: 32px 0;
+  }
+
+  .section__head h2 {
+    font-size: 22px;
+  }
+
+  /* NEWSLETTER */
+  .newsletter {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .newsletter__form {
+    width: 100%;
+  }
+
+  .newsletter__form input {
+    width: 100%;
+  }
+
+  .newsletter__form button {
+    width: 100%;
+  }
+
+  /* FOOTER */
+  .footer__inner {
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 420px) {
+  .brand__title {
+    font-size: 28px;
+  }
+
+  .hero__subhead {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   Mobile polish: Nav + Tiles
+   ========================= */
+@media (max-width: 520px) {
+
+  /* NAV: force single-line, swipeable */
+  .nav__links {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 6px;
+    /* space so scrollbar (if any) doesn't touch text */
+  }
+
+  .nav__links::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .nav__links a {
+    font-size: 14px;
+    padding: 8px 6px;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 520px) {
+
+  /* TILES: 2-column, less vertical dominance */
+  .section--tiles {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .tile img {
+    height: 130px;
+    /* was 240px */
+  }
+
+  .tile__label {
+    padding: 10px 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav__home {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .nav__inner {
+    gap: 12px;
+  }
+}
+
+/* Background-image tiles support (desktop + mobile) */
+.tiles--bg .tile {
+  min-height: 240px;
+  /* desktop baseline */
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 520px) {
+  .tiles--bg .tile {
+    min-height: 150px;
+    /* more square on mobile */
+  }
+}
+
+/* =========================
+   Mobile Nav polish (END)
+   ========================= */
+@media (max-width: 520px) {
+  .nav__inner {
+    align-items: center;
+  }
+
+  /* Make UG pill shorter + wider, and align with link baseline */
+  .nav__home {
+    width: 44px;
+    height: 30px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-6px);
+  }
+
+  /* Slightly tighten link row so everything sits nicely */
+  .nav__links a {
+    padding: 6px 0;
+    line-height: 1;
+  }
+}
+
+.nav {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@media (max-width: 520px) {
+  :root {
+    --hero-min: 240px;
+  }
+
+  .hero__inner {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+}
+
+/* =========================
+   FORCE mobile hero height (override)
+   ========================= */
+@media (max-width: 520px) {
+  .hero {
+    min-height: 300px !important;
+  }
+
+  .hero__inner {
+    padding-top: 30px !important;
+    padding-bottom: 20px !important;
+  }
+}
+
+/* Remove ugly tap highlight on mobile */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keep keyboard focus visible, but avoid weird click flash frames */
+a:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+/* Button/Link press feedback (mobile + desktop) */
+.btn,
+.nav__links a,
+.tile,
+.card {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+  filter: brightness(0.95);
+}
+
+.btn--ghost:active {
+  background: rgba(255, 255, 255, .18);
+}
+
+.btn--primary:active {
+  filter: brightness(0.92);
+}
+
+/* Optional: show press feedback for text links that look like buttons */
+a.textlink:active {
+  filter: brightness(0.92);
+}
+
+/* Press feedback (mobile + desktop) */
+.btn,
+.nav__links a,
+.tile,
+.card {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+  filter: brightness(0.95);
+}
+
+.btn--ghost:active {
+  background: rgba(255, 255, 255, .18);
+}
+
+.btn--primary:active {
+  filter: brightness(0.92);
+}
+
+/* Default card image placeholder (used when no inline background-image is set) */
+.card__media {
+  background-image: url("assets/card-placeholder.jpg");
+}
+
+/* Premium media hover/tap behavior */
+.card__media {
+  transition: transform .25s ease, filter .25s ease;
+}
+
+.card:hover .card__media {
+  transform: scale(1.03);
+  filter: brightness(1.02);
+}
+
+/* On touch devices, keep it subtle */
+@media (hover: none) {
+  .card:active .card__media {
+    transform: scale(1.02);
+    filter: brightness(1.01);
+  }
+}
+
+/* Home tiles use background images */
+.tiles--bg .tile {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 6 home tiles */
+.tile--news {
+  background-image: url("assets/tile-news.jpg");
+}
+
+.tile--travel {
+  background-image: url("assets/tile-travel.jpg");
+}
+
+.tile--business {
+  background-image: url("assets/tile-business.jpg");
+}
+
+.tile--shop {
+  background-image: url("assets/tile-shop.jpg");
+}
+
+.tile--premium {
+  background-image: url("assets/tile-premium.jpg");
+}
+
+.tile--about {
+  background-image: url("assets/tile-about.jpg");
+}
+
+/* Premium hover: card + image lift */
+.card {
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .14);
+}
+
+.card__media {
+  transition: transform .22s ease;
+}
+
+.card:hover .card__media {
+  transform: scale(1.03);
+}
+
+/* Same idea for tiles */
+.tile {
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+}
+
+/* ============================
+   Interaction Polish — Buttons
+   (append-only, final override)
+   ============================ */
+
+.btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+}
+
+/* Clear, premium “pressed” feedback */
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+  filter: brightness(0.96);
+}
+
+/* Make ghost buttons show feedback on tap */
+.btn--ghost:active {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.30);
+}
+
+/* Make primary buttons show feedback on tap */
+.btn--primary:active {
+  filter: brightness(0.92);
+}
+
+/* Keyboard accessibility (desktop) */
+.btn:focus-visible {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+
+/* ============================
+   Card Hover / Tap Polish
+   Premium Publisher Feel
+   ============================ */
+
+/* Lift + shadow on hover / tap */
+.card,
+.tile {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.card:hover,
+.tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* Mobile tap feedback */
+.card:active,
+.tile:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* Image zoom (works for bg + media cards) */
+.card__media,
+.tile {
+  background-size: cover;
+  background-position: center;
+}
+
+.card:hover .card__media,
+.tile:hover {
+  background-size: 108%;
+}
+
+/* Prevent ugly tap highlight on mobile */
+.card,
+.tile {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================
+   Navigation Final Polish — v4 (locked + padded + optical align)
+   ============================ */
+
+:root {
+  --nav-h: 56px;
+  --nav-rail: 34px;
+}
+
+.nav {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+}
+
+.nav__inner {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  /* ✅ restore side padding */
+  gap: 14px;
+  /* space between UG + links */
+}
+
+/* UG pill */
+.nav__home {
+  height: var(--nav-rail);
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
+  /* avoid glyph drift */
+  transform: translateY(1px);
+  /* ✅ optical: bring UG DOWN 1px */
+  flex: 0 0 auto;
+}
+
+/* Horizontal nav scroll */
+.nav__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nav__links::-webkit-scrollbar {
+  display: none;
+}
+
+.nav__links li {
+  flex: 0 0 auto;
+}
+
+/* Link rail */
+.nav__links a {
+  display: inline-flex;
+  align-items: center;
+
+  height: var(--nav-rail);
+  padding: 0 2px;
+  line-height: 1;
+
+  position: relative;
+  text-decoration: none;
+}
+
+/* Press feedback */
+.nav__links a:active {
+  opacity: 0.7;
+}
+
+/* Active page hook */
+.nav__links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: #ffcc00;
+}

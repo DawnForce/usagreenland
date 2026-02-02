@@ -1,0 +1,34 @@
+USAGreenland — Backend (Canonical Store)
+=======================================
+
+PURPOSE
+-------
+SQLite Canonical Store + seeds + migrations.
+Backend does NOT render pages directly.
+
+IMPORTANT
+---------
+• Do NOT open .html files directly from disk
+• Front-end rendering requires running the local server
+• Backend DB changes do NOT auto-update the site yet
+
+COMMON COMMANDS
+---------------
+
+Go to project root:
+cd "$env:USERPROFILE\OneDrive\Desktop\USA GREENLAN SITE FILES"
+
+Start front-end server:
+npx http-server . -p 5500
+
+Go to backend/store:
+cd "$env:USERPROFILE\OneDrive\Desktop\USA GREENLAN SITE FILES\backend\store"
+
+
+SQLite (explicit path):
+C:\sqlite\sqlite3.exe usagreenland.db
+
+LOCATION
+--------
+DB file: backend\store\usagreenland.db
+Seeds:   backend\store\seeds_*.sql

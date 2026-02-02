@@ -1,0 +1,97 @@
+// data/news-data.js
+// Canonical sample content — simulation pass
+// Purpose: populate all cards to experience real site flow
+
+export const NEWS_ITEMS = [
+
+    /* ======================
+       NEWS & ANALYSIS
+       ====================== */
+
+    {
+        id: "news-001",
+        scope: "news",
+        kicker: "Developing",
+        title: "U.S. Signals Expanded Arctic Coordination Talks",
+        deck: "Officials indicate renewed discussions involving Greenland and Denmark.",
+        meta: "Feb 2, 2026 • 2 min read",
+        href: "article-breaking.html",
+        img: "assets/news-breaking.jpg",
+    },
+    {
+        id: "news-002",
+        scope: "news",
+        kicker: "Deal Tracker",
+        title: "Framework Negotiations: What’s Changed So Far",
+        deck: "A running timeline of proposals, reactions, and next steps.",
+        meta: "Feb 1, 2026 • 5 min read",
+        href: "article-framework-timeline.html",
+        img: "assets/news-framework.jpg",
+    },
+    {
+        id: "news-003",
+        scope: "news",
+        kicker: "Diplomacy",
+        title: "Greenland and Denmark Reaffirm Consultation Requirements",
+        deck: "Leaders emphasize governance, consent, and transparency.",
+        meta: "Jan 30, 2026 • 4 min read",
+        href: "article-diplomacy-response.html",
+        img: "assets/news-diplomacy.jpg",
+    },
+
+    /* ======================
+       BUSINESS
+       ====================== */
+
+    {
+        id: "biz-001",
+        scope: "business",
+        kicker: "Infrastructure",
+        title: "What Arctic Port Expansion Could Cost",
+        deck: "Breaking down construction, logistics, and operating realities.",
+        meta: "Analysis • 6 min read",
+        href: "article-business-ports.html",
+        img: "assets/business-ports.jpg",
+    },
+    {
+        id: "biz-002",
+        scope: "business",
+        kicker: "Resources",
+        title: "Rare Earth Mining: Opportunities and Constraints",
+        deck: "Why extraction remains slower than headlines suggest.",
+        meta: "Explainer • 7 min read",
+        href: "article-business-minerals.html",
+        img: "assets/business-minerals.jpg",
+    },
+
+    /* ======================
+       EXPLAINERS
+       ====================== */
+
+    {
+        id: "exp-001",
+        scope: "home-latest",
+        kicker: "Explainer",
+        title: "What Would Formalized U.S.–Greenland Ties Actually Change?",
+        deck: "",
+        meta: "Evergreen • 6 min read",
+        href: "article-explainer-formalization.html",
+        img: "assets/explainer-formalization.jpg",
+    },
+
+    /* ======================
+       TRAVEL
+       ====================== */
+
+    {
+        id: "trav-001",
+        scope: "home-latest",
+        kicker: "Travel",
+        title: "Getting to Greenland: Routes, Seasons, Costs",
+        deck: "",
+        meta: "Guide • 5 min read",
+        href: "travel.html",
+        img: "assets/travel-routes.jpg",
+    },
+
+];
