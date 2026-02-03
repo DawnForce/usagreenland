@@ -1,0 +1,29 @@
+name: USAGreenland Content Validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Validate canonical articles
+        run: |
+          echo "Starting content validation..."
+          for file in article*.html; do
+            if [ -f "$file" ]; then
+              echo "Validating $file"
+              node validate-article.js "$file"
+            fi
+          done
+          echo "All canonical articles validated successfully."
