@@ -7,12 +7,10 @@
 
     <title>Business & Opportunities — USAGreenland.com</title>
     <meta name="description"
-        content="Track sectors, contracts, and commercial signals shaping the U.S.–Greenland relationship—from infrastructure and defense to energy and resources." />
+        content="Track sectors, contracts, and commercial signals shaping the U.S.–Greenland relationship." />
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://usagreenland.com/business.html" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="USAGreenland.com" />
     <meta property="og:title" content="Business & Opportunities — USAGreenland.com" />
@@ -20,26 +18,83 @@
         content="Commercial sectors and opportunity signals emerging from U.S.–Greenland ties." />
     <meta property="og:image" content="assets/og-business.jpg" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"
-        rel="stylesheet" />
-
-    <!-- Preload hero -->
     <link rel="preload" as="image" href="assets/hero-business.jpg" />
-
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* Business page additions only (safe: scoped + minimal). */
+
+        /* Ensure hero has a true background image (no dependency on styles.css). */
+        .hero.hero--business {
+            position: relative;
+            overflow: hidden;
+            background-image: url("assets/hero-business.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Keep text readable; more editorial. */
+        .hero.hero--business .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.78) 0%,
+                    rgba(0, 0, 0, 0.58) 40%,
+                    rgba(0, 0, 0, 0.30) 100%);
+            pointer-events: none;
+        }
+
+        .hero.hero--business .hero__inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Coming Soon section (cards match existing card system). */
+        .section--coming-soon .latest {
+            margin-top: 14px;
+        }
+
+        /* "Disabled" button style that still looks premium. */
+        .btn.btn--disabled {
+            opacity: 0.55;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        /* Small badge used inside placeholder cards. */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.86);
+            white-space: nowrap;
+        }
+
+        /* Make placeholder cards feel intentional without requiring new global classes. */
+        .card.card--soon {
+            position: relative;
+        }
+
+        .card.card--soon .card__metaRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- HERO -->
-    <header class="hero hero--business" role="banner">
-        <div class="hero__overlay" aria-hidden="true"></div>
-
+    <header class="hero hero--business" role="banner" aria-label="Business hero">
+        <div class="hero__overlay"></div>
         <div class="hero__inner">
             <div class="brand">
                 <h1 class="brand__title">Business & Opportunities</h1>
@@ -49,19 +104,13 @@
             <p class="hero__subhead">
                 Track sectors, contracts, and commercial signals shaping the U.S.–Greenland relationship.
             </p>
-
-            <div class="hero__cta">
-                <a class="btn btn--ghost" href="index.html">Back to Home</a>
-                <a class="btn btn--primary" href="#sectors">Browse Sectors</a>
-            </div>
         </div>
     </header>
 
     <!-- NAV -->
     <nav class="nav" aria-label="Primary navigation">
         <div class="nav__inner">
-            <a class="nav__home" href="index.html" aria-label="USAGreenland Home">UG</a>
-
+            <a class="nav__home" href="index.html">UG</a>
             <ul class="nav__links">
                 <li><a href="news.html">News & Analysis</a></li>
                 <li><a href="travel.html">Travel Guide</a></li>
@@ -75,30 +124,7 @@
 
     <main>
 
-        <!-- HOW TO USE -->
-        <section class="section">
-            <div class="container">
-                <div class="newsletter">
-                    <div>
-                        <h2>How to use this section</h2>
-                        <p>
-                            This page provides a structured overview of key commercial sectors.
-                            Each card links to a foundational sector briefing that will evolve over time.
-                        </p>
-                        <ul>
-                            <li><strong>Fast scan:</strong> sector cards and summaries</li>
-                            <li><strong>Foundations:</strong> sector-level explainers</li>
-                            <li><strong>Signals:</strong> policy, infrastructure, and investment movement</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <a class="btn btn--primary" href="#inquire">Partnership inquiry</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTORS -->
+        <!-- KEY SECTORS -->
         <section class="section section--latest" id="sectors">
             <div class="container">
                 <div class="section__head">
@@ -107,13 +133,6 @@
                         Foundational sectors shaping economic, strategic, and investment activity in Greenland.
                     </p>
                 </div>
-
-                <!--
-                  NOTE (LOCKED):
-                  - Sector cards are static by design in Phase #6
-                  - Canonical sector = BUSINESS
-                  - Sub-sectors are informational, not analytical
-                -->
 
                 <div class="latest">
 
@@ -160,7 +179,7 @@
                     <a href="business/sectors/fisheries-maritime.html" class="card">
                         <div class="card__media" style="background-image:url('assets/business-6.jpg');"></div>
                         <p class="card__kicker">Maritime</p>
-                        <h3 class="card__title">Fisheries &amp; Maritime Economy</h3>
+                        <h3 class="card__title">Fisheries & Maritime Economy</h3>
                         <p>Exports, sustainability signals, and logistics foundations.</p>
                         <p class="card__meta">Sector briefing</p>
                     </a>
@@ -168,7 +187,7 @@
                     <a href="business/sectors/technology-communications.html" class="card">
                         <div class="card__media" style="background-image:url('assets/business-7.jpg');"></div>
                         <p class="card__kicker">Technology</p>
-                        <h3 class="card__title">Technology &amp; Communications</h3>
+                        <h3 class="card__title">Technology & Communications</h3>
                         <p>Connectivity, satellite services, and resilience capacity.</p>
                         <p class="card__meta">Sector briefing</p>
                     </a>
@@ -177,30 +196,57 @@
             </div>
         </section>
 
-        <!-- INQUIRY -->
-        <section class="section section--newsletter" id="inquire">
+        <!-- COMING SOON MODULES -->
+        <section class="section section--latest section--coming-soon" id="next-modules">
             <div class="container">
-                <div class="newsletter">
-                    <div>
-                        <h2>Partnership Inquiry</h2>
+                <div class="section__head">
+                    <h2>Coming Soon</h2>
+                    <p class="section__subhead">
+                        Placeholders are live now. These modules will be wired into the automation spine.
+                    </p>
+                </div>
+
+                <div class="latest">
+
+                    <!-- Market Overview -->
+                    <div class="card card--soon" aria-label="Market Overview coming soon">
+                        <div class="card__media" style="background-image:url('assets/business-8.jpg');"></div>
+                        <p class="card__kicker">Signals</p>
+                        <h3 class="card__title">Market Overview</h3>
                         <p>
-                            If you’re an operator, investor, or vendor with relevant opportunities, reach out.
+                            Snapshot dashboards for Greenland–U.S. sectors: critical minerals, logistics, ports, energy,
+                            and investment signals.
                         </p>
+
+                        <div class="card__metaRow">
+                            <p class="card__meta">Module • Coming soon</p>
+                            <span class="badge">Coming Soon</span>
+                        </div>
                     </div>
 
-                    <form class="newsletter__form">
-                        <input type="text" placeholder="Name" required />
-                        <input type="email" placeholder="Email" required />
-                        <input type="text" placeholder="Message (short)" required />
-                        <button class="btn btn--primary" type="submit">Send</button>
-                    </form>
+                    <!-- Partner Inquiry -->
+                    <div class="card card--soon" aria-label="Partner Inquiry coming soon">
+                        <div class="card__media" style="background-image:url('assets/business-9.jpg');"></div>
+                        <p class="card__kicker">Intake</p>
+                        <h3 class="card__title">Partner Inquiry</h3>
+                        <p>
+                            A structured intake for operators, suppliers, and agencies. Routes to the correct lane with
+                            clean metadata.
+                        </p>
+
+                        <div class="card__metaRow">
+                            <p class="card__meta">Module • Coming soon</p>
+                            <span class="badge">Coming Soon</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="container footer__inner">
             <p>© 2026 USAGreenland.com • Total Access</p>
             <div class="footer__links">

@@ -49,21 +49,27 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  /* IMPORTANT: do NOT set overflow on html */
+}
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
-  /* premium: prevents page-level sideways drift */
-}
 
-body {
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--ink);
   line-height: 1.6;
+
+  /* horizontal safety without killing sticky */
+  overflow-x: clip;
 }
 
 img,
@@ -232,12 +238,12 @@ button {
   filter: brightness(.92);
 }
 
-/* ------------------- nav (LOCKED) ------------------- */
+/* ------------------- nav (LOCKED / STICKY SAFE) ------------------- */
 
 .nav {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 1000;
 
   height: var(--nav-h);
   display: flex;
@@ -246,10 +252,6 @@ button {
   background: rgba(0, 31, 63, .92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
-
-  /* stabilize sticky paints on mobile */
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .nav__inner {
@@ -265,7 +267,6 @@ button {
   gap: 14px;
 
   min-width: 0;
-  /* critical: prevents flex overflow */
 }
 
 .nav__home {
@@ -284,10 +285,7 @@ button {
   font-size: 14px;
   font-weight: 800;
   line-height: 1;
-
   flex: 0 0 auto;
-  transform: translateY(1px);
-  /* optical align */
 }
 
 .nav__links {
@@ -300,14 +298,11 @@ button {
   gap: 14px;
 
   min-width: 0;
-  /* prevents flex overflow */
   overflow-x: auto;
-  /* intentional horizontal scroll */
   overflow-y: hidden;
 
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .nav__links::-webkit-scrollbar {
@@ -340,11 +335,6 @@ button {
   text-decoration: underline;
 }
 
-.nav__links a:active {
-  opacity: .70;
-}
-
-/* Active page underline */
 .nav__links a[aria-current="page"]::after {
   content: "";
   position: absolute;
@@ -542,12 +532,45 @@ button {
 }
 
 .card__kicker {
-  margin: 0;
+  margin: 0 0 6px;
   color: var(--accent2);
-  font-weight: 900;
-  letter-spacing: .3px;
+
+  font-weight: 700;
+  /* slightly less shouty */
+  letter-spacing: .08em;
+  /* more editorial */
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 11px;
+  /* tighter, more refined */
+}
+
+.card__kicker::after {
+  content: none;
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin-top: 6px;
+  background: currentColor;
+  opacity: .25;
+}
+
+/* --- Editorial category kicker (strengthened) --- */
+
+.card__kicker {
+  display: inline-block;
+  margin: 10px 0 6px;
+  /* space from image + title */
+  padding: 4px 10px;
+
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  border-radius: 999px;
+  /* pill */
+  background: rgba(11, 18, 32, 0.08);
+  /* neutral ink-based pill */
 }
 
 .card__title {
@@ -774,5 +797,122 @@ button {
 
   .hero__subhead {
     font-size: 14px;
+  }
+}
+
+/* =========================
+   HERO CTA — v2 (LOCKED)
+   ========================= */
+
+.hero__cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+/* Primary CTA */
+.hero__cta .btn--primary {
+  background: linear-gradient(135deg, #0b5ed7, #084298);
+  color: #fff;
+  font-weight: 700;
+  padding: 14px 22px;
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(11, 94, 215, 0.35);
+}
+
+/* Secondary CTA */
+.hero__cta .btn--secondary {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 14px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Hover intent (desktop only) */
+@media (hover: hover) {
+  .hero__cta .btn--primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 36px rgba(11, 94, 215, 0.45);
+  }
+
+  .hero__cta .btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* Mobile stack */
+@media (max-width: 640px) {
+  .hero__cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__cta a {
+    text-align: center;
+  }
+}
+
+/* Hero CTA — Mobile refinement */
+@media (max-width: 640px) {
+  .hero__cta {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero__cta .btn--primary,
+  .hero__cta .btn--secondary {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+
+  .hero__cta .btn--primary {
+    box-shadow: 0 8px 22px rgba(11, 94, 215, 0.28);
+  }
+
+  .hero__cta .btn--secondary {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+/* Hero CTA — compact, side-by-side */
+.hero__cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+/* Buttons: reduce mass */
+.hero__cta .btn {
+  padding: 10px 18px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+/* Primary = confident, not loud */
+.hero__cta .btn--primary {
+  box-shadow: 0 6px 18px rgba(11, 94, 215, 0.25);
+}
+
+/* Secondary = quiet */
+.hero__cta .btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Mobile: still side-by-side, just tighter */
+@media (max-width: 640px) {
+  .hero__cta {
+    gap: 12px;
+  }
+
+  .hero__cta .btn {
+    padding: 10px 16px;
+    font-size: 14.5px;
   }
 }
