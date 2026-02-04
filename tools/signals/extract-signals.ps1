@@ -1,13 +1,14 @@
 # ============================================
 # USAGreenland.com — SIGNALS_V1 Extractor
-# Phase 37 + Phase 39.1
+# Phase 37 + 39.1 + 39.2
 # Read-only | PowerShell
 # ============================================
 
 param (
     [string]$RootPath = ".",
     [string]$ReportPath = "./tools/signals/signals_report.md",
-    [string]$NormalizedPath = "./tools/signals/signals_normalized.json"
+    [string]$NormalizedPath = "./tools/signals/signals_normalized.json",
+    [string]$ScoredPath = "./tools/signals/signals_scored.json"
 )
 
 # -----------------------------
@@ -37,7 +38,7 @@ $CONFIDENCE_MAP = @{
 Write-Host "Scanning for SIGNALS_V1 blocks..." -ForegroundColor Cyan
 
 # -----------------------------
-# Extraction
+# Extraction (Phase 37)
 # -----------------------------
 
 $results = @()
@@ -95,13 +96,44 @@ foreach ($r in $results) {
     }
 }
 
-# -----------------------------
-# Write Normalized Output
-# -----------------------------
-
 $normalizedSignals |
     ConvertTo-Json -Depth 5 |
     Set-Content -Encoding UTF8 $NormalizedPath
+
+# -----------------------------
+# Scoring & Ranking (Phase 39.2)
+# -----------------------------
+
+$scoredSignals = @()
+
+foreach ($s in $normalizedSignals) {
+
+    $score = $s.horizon_weight * $s.direction_weight * $s.confidence_weight
+
+    $scoredSignals += [PSCustomObject]@{
+        file              = $s.file
+        type              = $s.type
+        sector            = $s.sector
+        scope             = $s.scope
+        horizon           = $s.horizon
+        direction         = $s.direction
+        confidence        = $s.confidence
+
+        horizon_weight    = $s.horizon_weight
+        direction_weight  = $s.direction_weight
+        confidence_weight = $s.confidence_weight
+
+        signal_score      = [Math]::Round($score, 2)
+    }
+}
+
+$scoredSignals =
+    $scoredSignals |
+    Sort-Object -Property signal_score -Descending
+
+$scoredSignals |
+    ConvertTo-Json -Depth 5 |
+    Set-Content -Encoding UTF8 $ScoredPath
 
 # -----------------------------
 # Markdown Report (Human Audit)
@@ -136,3 +168,4 @@ $report | Out-File -Encoding UTF8 $ReportPath
 Write-Host "Signal extraction complete." -ForegroundColor Green
 Write-Host "Report written to: $ReportPath" -ForegroundColor Yellow
 Write-Host "Normalized signals written to: $NormalizedPath" -ForegroundColor Yellow
+Write-Host "Scored signals written to: $ScoredPath" -ForegroundColor Yellow
