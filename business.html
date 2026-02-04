@@ -22,9 +22,8 @@
     <link rel="stylesheet" href="styles.css" />
 
     <style>
-        /* Business page additions only (safe: scoped + minimal). */
+        /* Page-scoped only */
 
-        /* Ensure hero has a true background image (no dependency on styles.css). */
         .hero.hero--business {
             position: relative;
             overflow: hidden;
@@ -33,7 +32,6 @@
             background-position: center;
         }
 
-        /* Keep text readable; more editorial. */
         .hero.hero--business .hero__overlay {
             position: absolute;
             inset: 0;
@@ -49,23 +47,9 @@
             z-index: 2;
         }
 
-        /* Coming Soon section (cards match existing card system). */
-        .section--coming-soon .latest {
-            margin-top: 14px;
-        }
-
-        /* "Disabled" button style that still looks premium. */
-        .btn.btn--disabled {
-            opacity: 0.55;
-            pointer-events: none;
-            cursor: default;
-        }
-
-        /* Small badge used inside placeholder cards. */
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
             font-size: 12px;
             padding: 6px 10px;
             border-radius: 999px;
@@ -75,12 +59,7 @@
             white-space: nowrap;
         }
 
-        /* Make placeholder cards feel intentional without requiring new global classes. */
-        .card.card--soon {
-            position: relative;
-        }
-
-        .card.card--soon .card__metaRow {
+        .card__metaRow {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -196,51 +175,45 @@
             </div>
         </section>
 
-        <!-- COMING SOON MODULES -->
-        <section class="section section--latest section--coming-soon" id="next-modules">
+        <!-- COMING SOON -->
+        <section class="section section--latest" id="next-modules">
             <div class="container">
                 <div class="section__head">
                     <h2>Coming Soon</h2>
                     <p class="section__subhead">
-                        Placeholders are live now. These modules will be wired into the automation spine.
+                        These modules are being wired into the business intelligence layer.
                     </p>
                 </div>
 
                 <div class="latest">
 
-                    <!-- Market Overview -->
                     <a class="card" href="business/market-overview.html">
                         <div class="card__media" style="background-image:url('assets/business-8.jpg');"></div>
                         <p class="card__kicker">Signals</p>
                         <h3 class="card__title">Market Overview</h3>
                         <p>
-                            Snapshot dashboards for Greenland–U.S. sectors: critical minerals, logistics, ports, energy,
-                            and investment signals.
+                            Snapshot dashboards across Greenland–U.S. sectors and strategic activity.
                         </p>
-
                         <div class="card__metaRow">
-                            <p class="card__meta">Module • Coming soon</p>
+                            <p class="card__meta">Module</p>
+                            <span class="badge">Live</span>
+                        </div>
+                    </a>
+
+                    <div class="card">
+                        <div class="card__media" style="background-image:url('assets/business-9.jpg');"></div>
+                        <p class="card__kicker">Intake</p>
+                        <h3 class="card__title">Partner Inquiry</h3>
+                        <p>
+                            Structured intake for operators, suppliers, and agencies.
+                        </p>
+                        <div class="card__metaRow">
+                            <p class="card__meta">Module</p>
                             <span class="badge">Coming Soon</span>
                         </div>
-                </div>
-
-                <!-- Partner Inquiry -->
-                <div class="card card--soon" aria-label="Partner Inquiry coming soon">
-                    <div class="card__media" style="background-image:url('assets/business-9.jpg');"></div>
-                    <p class="card__kicker">Intake</p>
-                    <h3 class="card__title">Partner Inquiry</h3>
-                    <p>
-                        A structured intake for operators, suppliers, and agencies. Routes to the correct lane with
-                        clean metadata.
-                    </p>
-
-                    <div class="card__metaRow">
-                        <p class="card__meta">Module • Coming soon</p>
-                        <span class="badge">Coming Soon</span>
                     </div>
-                </div>
 
-            </div>
+                </div>
             </div>
         </section>
 
