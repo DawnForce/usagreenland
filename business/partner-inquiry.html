@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Partner Inquiry — Business Intake | USAGreenland.com</title>
+    <meta name="description"
+        content="A structured intake for organizations exploring partnership, supply, or participation in U.S.–Greenland business activity." />
+
+    <link rel="canonical" href="https://usagreenland.com/business/partner-inquiry.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="USAGreenland.com" />
+    <meta property="og:title" content="Partner Inquiry — USAGreenland.com" />
+    <meta property="og:description"
+        content="Submit an initial inquiry for partnership, supply, or collaboration related to U.S.–Greenland commercial activity." />
+    <meta property="og:image" content="../assets/og-business.jpg" />
+
+    <link rel="stylesheet" href="../styles.css?v=29.0" />
+
+    <style>
+        /* Page-scoped only */
+
+        .hero.hero--partner {
+            position: relative;
+            overflow: hidden;
+            background-image: url("../assets/hero-business.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero.hero--partner .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    rgba(0, 0, 0, 0.80) 0%,
+                    rgba(0, 0, 0, 0.55) 45%,
+                    rgba(0, 0, 0, 0.25) 100%);
+            pointer-events: none;
+        }
+
+        .hero.hero--partner .hero__inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .intake {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .intake__notice {
+            margin-bottom: 18px;
+            font-size: 14px;
+            opacity: 0.75;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.05);
+            color: inherit;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn--disabled {
+            opacity: 0.55;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.86);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header class="hero hero--partner" role="banner" aria-label="Partner inquiry hero">
+        <div class="hero__overlay"></div>
+        <div class="hero__inner">
+            <div class="brand">
+                <h1 class="brand__title">Partner Inquiry</h1>
+                <p class="brand__tagline">Business Intake</p>
+            </div>
+
+            <p class="hero__subhead">
+                Initial intake for organizations exploring participation, supply, or collaboration
+                related to U.S.–Greenland commercial activity.
+            </p>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav" aria-label="Primary navigation">
+        <div class="nav__inner">
+            <a class="nav__home" href="../index.html">UG</a>
+            <ul class="nav__links">
+                <li><a href="../news.html">News & Analysis</a></li>
+                <li><a href="../travel.html">Travel Guide</a></li>
+                <li><a href="../business.html" aria-current="page">Business</a></li>
+                <li><a href="../shop.html">Shop</a></li>
+                <li><a href="../premium.html">Premium</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- INTAKE -->
+        <section class="section section--latest">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Submit an Inquiry</h2>
+                    <p class="section__subhead">
+                        This form captures high-level intent only. No sensitive or contractual information
+                        should be submitted at this stage.
+                    </p>
+                </div>
+
+                <div class="intake">
+                    <p class="intake__notice">
+                        This intake is currently in preview mode. Submissions are not yet processed.
+                    </p>
+
+                    <form>
+
+                        <div class="form-group">
+                            <label for="org">Organization</label>
+                            <input id="org" type="text" placeholder="Organization or company name" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact">Primary Contact</label>
+                            <input id="contact" type="text" placeholder="Name and role" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Contact Email</label>
+                            <input id="email" type="email" placeholder="email@organization.com" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sector">Primary Sector</label>
+                            <select id="sector">
+                                <option selected disabled>Choose a sector</option>
+                                <option>Critical Minerals</option>
+                                <option>Energy & Power</option>
+                                <option>Infrastructure & Construction</option>
+                                <option>Defense & Strategic Presence</option>
+                                <option>Tourism & Hospitality</option>
+                                <option>Fisheries & Maritime</option>
+                                <option>Technology & Communications</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="intent">Inquiry Summary</label>
+                            <textarea id="intent"
+                                placeholder="Briefly describe the nature of your interest or proposed involvement."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn--disabled" type="button">Submit Inquiry</button>
+                            <span class="badge">Preview</span>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p>© 2026 USAGreenland.com • Total Access</p>
+            <div class="footer__links">
+                <a href="../about.html">Contact</a>
+                <a href="../premium.html">Premium</a>
+                <a href="../news.html">News</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
