@@ -1,88 +1,79 @@
-# ============================================
+﻿# ============================================
 # USAGreenland.com — Market Overview Rollup
-# Phase 40.1
-# Read-only | PowerShell
+# Phase 42 — Reader-Facing Sector Rollups
+# Read-only | PowerShell | LOCKED
 # ============================================
 
 param (
-    [string]$ScoredPath = "./tools/signals/signals_scored.json",
-    [string]$RollupPath = "./tools/signals/market_rollup.json"
+    [string]$ScoredPath = 'signals_scored.json',
+    [string]$RollupPath = 'market_rollup.json'
 )
-function Normalize-Path {
-    param ($path)
 
-    $normalized = $path `
-        -replace '.*USA GREENLAN SITE FILES[\\/]', '' `
-        -replace '\\', '/'
+Write-Host 'Generating reader-facing market rollup...' -ForegroundColor Cyan
 
-    return $normalized
-}
-
-Write-Host "Generating market rollup..." -ForegroundColor Cyan
+$ScriptDir  = Split-Path -Parent $MyInvocation.MyCommand.Path
+$ScoredPath = Join-Path $ScriptDir $ScoredPath
+$RollupPath = Join-Path $ScriptDir $RollupPath
 
 if (-not (Test-Path $ScoredPath)) {
-    Write-Error "signals_scored.json not found. Run extract-signals.ps1 first."
+    Write-Error 'signals_scored.json not found. Run extract-signals.ps1 first.'
     exit 1
 }
 
 $signals = Get-Content $ScoredPath -Raw | ConvertFrom-Json
 
-# -----------------------------
-# Top Signals (by score)
-# -----------------------------
+$siteRoot = "C:\Users\bain7\OneDrive\Desktop\USA GREENLAN SITE FILES"
 
-$topSignals =
+function Get-ActivityLabel {
+    param ($score)
+    if ($score -ge 85) { return 'Accelerating' }
+    if ($score -ge 65) { return 'High' }
+    if ($score -ge 40) { return 'Moderate' }
+    return 'Low'
+}
+
+$sectorRollup =
     $signals |
-    Sort-Object signal_score -Descending |
-    Select-Object -First 5 |
+    Group-Object sector |
     ForEach-Object {
+        $sectorSignals = $_.Group
+        $dominantScore =
+            ($sectorSignals | Measure-Object signal_score -Maximum).Maximum
+
+        $sources =
+            $sectorSignals |
+            Select-Object -ExpandProperty file -Unique |
+            ForEach-Object {
+                $path = $_
+                if ($path.StartsWith($siteRoot)) {
+                    $path = $path.Substring($siteRoot.Length)
+                }
+                $path = $path -replace '\\', '/'
+                $path = $path.ToLower()
+                $path = $path -replace ' ', '-'
+
+         # Ensure .html extension is correct
+                if ($path -match 'html$' -and $path -notmatch '\.html$') {
+                $path = $path -replace 'html$', '.html'
+                }
+
+                if (-not $path.StartsWith('/')) {
+                    $path = "/$path"
+                }
+                $path
+            }
+
         [PSCustomObject]@{
-            file         = Normalize-Path $_.file
-            type         = $_.type
-            sector       = $_.sector
-            signal_score = $_.signal_score
+            sector      = $_.Name
+            activity    = Get-ActivityLabel $dominantScore
+            sourceCount = $sources.Count
+            articles    = $sources
         }
-    }
+    } |
+    Sort-Object sector
 
-# -----------------------------
-# Sector Heat (aggregate score)
-# -----------------------------
-
-$sectorHeat = @{}
-
-foreach ($s in $signals) {
-    if (-not $sectorHeat.ContainsKey($s.sector)) {
-        $sectorHeat[$s.sector] = 0
-    }
-    $sectorHeat[$s.sector] += $s.signal_score
-}
-
-# -----------------------------
-# Signal Mix (count by type)
-# -----------------------------
-
-$signalMix = @{}
-
-foreach ($s in $signals) {
-    if (-not $signalMix.ContainsKey($s.type)) {
-        $signalMix[$s.type] = 0
-    }
-    $signalMix[$s.type] += 1
-}
-
-# -----------------------------
-# Assemble Rollup
-# -----------------------------
-
-$rollup = [PSCustomObject]@{
-    generated_at = (Get-Date -Format "yyyy-MM-dd HH:mm")
-    top_signals  = $topSignals
-    sector_heat = $sectorHeat
-    signal_mix  = $signalMix
-}
-
-$rollup |
-    ConvertTo-Json -Depth 5 |
+$sectorRollup |
+    ConvertTo-Json -Depth 4 |
     Set-Content -Encoding UTF8 $RollupPath
 
-Write-Host "Market rollup written to: $RollupPath" -ForegroundColor Yellow
+Write-Host 'Market rollup complete.'

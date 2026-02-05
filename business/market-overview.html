@@ -71,10 +71,67 @@
             font-size: 14px;
             opacity: 0.7;
         }
+
+        /* Phase 43 — Calm editorial reveal (no animations) */
+        #market-signals-list li.snapshot-row {
+            cursor: pointer;
+        }
+
+        #market-signals-list li.snapshot-row:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.25);
+            outline-offset: 2px;
+        }
+
+        #market-signals-list ul.snapshot-articles {
+            margin: 8px 0 10px 16px;
+            padding-left: 16px;
+        }
+
+        #market-signals-list ul.snapshot-articles li {
+            margin: 4px 0;
+        }
+
+        #market-signals-list ul.snapshot-articles a {
+            text-decoration: none;
+        }
+
+        #market-signals-list ul.snapshot-articles a:hover {
+            text-decoration: underline;
+        }
+
+        #market-signals-list .snapshot-hint {
+            display: block;
+            font-size: 12px;
+            opacity: 0.65;
+            margin-top: 4px;
+        }
     </style>
 </head>
 
 <body>
+    <!--
+    SIGNALS_V1
+    {
+      "signals": [
+        {
+          "type": "policy",
+          "sector": "multi-sector",
+          "scope": "bilateral",
+          "horizon": "mid-long",
+          "direction": "emerging",
+          "confidence": "medium"
+        },
+        {
+          "type": "infrastructure",
+          "sector": "infrastructure",
+          "scope": "strategic",
+          "horizon": "long",
+          "direction": "emerging",
+          "confidence": "medium"
+        }
+      ]
+    }
+    -->
 
     <!-- HERO -->
     <header class="hero hero--market" role="banner">
@@ -105,6 +162,14 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Phase 42: Snapshot belongs BELOW NAV; leaving markup here but we will move it in Phase 42 placement fix -->
+    <section id="market-signals" class="market-signals">
+        <h2>Market Activity Snapshot</h2>
+        <ul id="market-signals-list">
+            <li>Loading market activity…</li>
+        </ul>
+    </section>
 
     <main>
 
@@ -216,28 +281,236 @@
     </footer>
 
 </body>
-<!--
-SIGNALS_V1
-{
-  "signals": [
-    {
-      "type": "policy",
-      "sector": "multi-sector",
-      "scope": "bilateral",
-      "horizon": "mid-long",
-      "direction": "emerging",
-      "confidence": "medium"
-    },
-    {
-      "type": "infrastructure",
-      "sector": "infrastructure",
-      "scope": "strategic",
-      "horizon": "long",
-      "direction": "emerging",
-      "confidence": "medium"
-    }
-  ]
-}
--->
+
+<script>
+    // ============================================================
+    // USAGreenland.com — Market Overview
+    // Phase 42 (LOCKED): Reader-Facing Snapshot
+    // Phase 43 (LOCKED): Click-Through Attribution
+    // Phase 44A (LOCKED): Soft Premium Gate (preview)
+    // Phase 44B (LOCKED): Reader-Friendly Copy
+    // ============================================================
+
+    // ------------------------------------------------------------
+    // OWNER OVERRIDE (you always see everything)
+    // ------------------------------------------------------------
+    const IS_SITE_OWNER = true;
+
+    // ------------------------------------------------------------
+    // VISIBILITY CONFIG (Phase 44A)
+    // ------------------------------------------------------------
+    const ATTRIBUTION_PREVIEW_COUNT = 2;
+
+    // ------------------------------------------------------------
+    // Sector label formatter
+    // ------------------------------------------------------------
+    const formatSector = (slug) => {
+        if (!slug || typeof slug !== 'string') return null;
+
+        const clean = slug.trim().toLowerCase();
+
+        if (
+            clean === 'multi-sector' ||
+            clean === 'sector_name' ||
+            clean === 'sector-name'
+        ) {
+            return null;
+        }
+
+        return clean
+            .split('-')
+            .filter(Boolean)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' ');
+    };
+
+    // ------------------------------------------------------------
+    // Filename → human fallback
+    // ------------------------------------------------------------
+    const humanizeFilename = (path) => {
+        return String(path || '')
+            .split('/')
+            .pop()
+            .replace(/\.html?$/i, '')
+            .replace(/[-_]+/g, ' ')
+            .replace(/\b\w/g, c => c.toUpperCase())
+            .trim() || 'Article';
+    };
+
+    // ------------------------------------------------------------
+    // Resolve clean, reader-friendly titles
+    // ------------------------------------------------------------
+    const resolveTitle = async (path) => {
+        try {
+            const res = await fetch(path, { method: 'GET' });
+            if (!res.ok) throw new Error('title fetch failed');
+
+            const html = await res.text();
+            const match = html.match(/<title>(.*?)<\/title>/i);
+
+            if (match && match[1]) {
+                let title = match[1];
+
+                // Normalize dash variants
+                title = title.replace(/[–—]/g, '—');
+
+                // Strip site / SEO suffixes
+                title = title
+                    .replace(/\s*—\s*Business Sector Overview\s*\|\s*USAGreenland\.com$/i, '')
+                    .replace(/\s*—\s*Business Intelligence\s*\|\s*USAGreenland\.com$/i, '')
+                    .replace(/\s*\|\s*USAGreenland\.com$/i, '')
+                    .replace(/\s*—\s*USAGreenland\.com$/i, '')
+                    .trim();
+
+                return title;
+            }
+        } catch (e) {
+            // silent fallback
+        }
+
+        return humanizeFilename(path);
+    };
+
+    // ------------------------------------------------------------
+    // Build attribution list (Phase 43 + 44)
+    // ------------------------------------------------------------
+    const makeAttributionList = async (paths, ul) => {
+        const uniq = Array.from(new Set((paths || []).filter(Boolean)));
+
+        if (uniq.length === 0) {
+            const li = document.createElement('li');
+            li.textContent = 'No sources available.';
+            ul.appendChild(li);
+            return;
+        }
+
+        const isOpen = IS_SITE_OWNER;
+        const limit = isOpen ? uniq.length : ATTRIBUTION_PREVIEW_COUNT;
+
+        for (let i = 0; i < uniq.length; i++) {
+            if (i === limit && !isOpen) {
+                const li = document.createElement('li');
+                li.className = 'snapshot-gate-note';
+                li.textContent =
+                    'More detail on where this activity is coming from is available with Premium.';
+                ul.appendChild(li);
+                break;
+            }
+
+            const path = uniq[i];
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+
+            a.href = path;
+            a.target = '_self'; // LOCKED
+            a.rel = 'noopener';
+            a.textContent = await resolveTitle(path);
+
+            li.appendChild(a);
+            ul.appendChild(li);
+        }
+    };
+
+    // ------------------------------------------------------------
+    // Fetch + render Market Activity Snapshot
+    // ------------------------------------------------------------
+    fetch('/tools/signals/market_rollup.json')
+        .then(res => {
+            if (!res.ok) throw new Error('Rollup fetch failed');
+            return res.json();
+        })
+        .then(data => {
+            const list = document.getElementById('market-signals-list');
+            list.innerHTML = '';
+
+            if (!Array.isArray(data) || data.length === 0) {
+                list.innerHTML = '<li>Signals unavailable.</li>';
+                return;
+            }
+
+            const rows = data
+                .map(item => {
+                    const label = formatSector(item?.sector);
+                    if (!label) return null;
+
+                    return {
+                        label,
+                        activity: item.activity || 'Low',
+                        sourceCount: Number(item.sourceCount || 0),
+                        articles: Array.isArray(item.articles) ? item.articles : []
+                    };
+                })
+                .filter(Boolean)
+                .sort((a, b) => a.label.localeCompare(b.label));
+
+            if (rows.length === 0) {
+                list.innerHTML = '<li>Signals unavailable.</li>';
+                return;
+            }
+
+            rows.forEach(row => {
+                const li = document.createElement('li');
+                li.className = 'snapshot-row';
+                li.setAttribute('aria-expanded', 'false');
+
+                const sourcesLabel = row.sourceCount === 1 ? 'source' : 'sources';
+
+                // Summary line
+                const summary = document.createElement('div');
+                summary.className = 'snapshot-summary';
+                summary.textContent =
+                    `${row.label} — Market Activity: ${row.activity} (${row.sourceCount} ${sourcesLabel})`;
+
+                // Hint line (only interactive affordance)
+                const hint = document.createElement('span');
+                hint.className = 'snapshot-hint';
+                hint.textContent = 'See what reporting this signal is based on.';
+                hint.tabIndex = 0;
+                hint.setAttribute('role', 'button');
+
+                li.appendChild(summary);
+                li.appendChild(hint);
+
+                li.dataset.articles = JSON.stringify(row.articles || []);
+
+                const ul = document.createElement('ul');
+                ul.className = 'snapshot-articles';
+                ul.hidden = true;
+
+                let hydrated = false;
+
+                const toggle = async () => {
+                    const willOpen = ul.hidden === true;
+                    ul.hidden = !ul.hidden;
+                    li.setAttribute('aria-expanded', String(willOpen));
+
+                    if (!willOpen || hydrated) return;
+
+                    hydrated = true;
+                    const paths = JSON.parse(li.dataset.articles || '[]');
+                    await makeAttributionList(paths, ul);
+                };
+
+                hint.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggle();
+                });
+
+                hint.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggle();
+                    }
+                });
+
+                list.appendChild(li);
+                list.appendChild(ul);
+            });
+        })
+        .catch(() => {
+            document.getElementById('market-signals-list').innerHTML =
+                '<li>Signals unavailable.</li>';
+        });
+</script>
 
 </html>

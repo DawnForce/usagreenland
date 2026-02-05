@@ -1,0 +1,63 @@
+﻿[
+    {
+        "sector":  "critical-minerals",
+        "activity":  "Low",
+        "sourceCount":  2,
+        "articles":  [
+                         "/business/sectors/critical-minerals.html",
+                         "/article3.html"
+                     ]
+    },
+    {
+        "sector":  "defense",
+        "activity":  "Low",
+        "sourceCount":  1,
+        "articles":  "/articles/arctic-defense-posture-overview.html"
+    },
+    {
+        "sector":  "energy",
+        "activity":  "Low",
+        "sourceCount":  1,
+        "articles":  "/business/sectors/energy-power.html"
+    },
+    {
+        "sector":  "infrastructure",
+        "activity":  "Low",
+        "sourceCount":  9,
+        "articles":  [
+                         "/business/sectors/tourism-hospitality.html",
+                         "/business/market-overview.html",
+                         "/business/partner-inquiry.html",
+                         "/business/sectors/defense-strategic-presence.html",
+                         "/business/sectors/infrastructure-construction.html",
+                         "/business/sectors/technology-communications.html",
+                         "/business/sectors/energy-power.html",
+                         "/business/sectors/fisheries-maritime.html",
+                         "/articles/arctic-infrastructure-development-overview.html"
+                     ]
+    },
+    {
+        "sector":  "multi-sector",
+        "activity":  "Low",
+        "sourceCount":  7,
+        "articles":  [
+                         "/business/sectors/fisheries-maritime.html",
+                         "/business/sectors/technology-communications.html",
+                         "/business/sectors/defense-strategic-presence.html",
+                         "/business/market-overview.html",
+                         "/business/sectors/tourism-hospitality.html",
+                         "/article2.html",
+                         "/articles/us-greenland-business-outlook.html"
+                     ]
+    },
+    {
+        "sector":  "SECTOR_NAME",
+        "activity":  "Low",
+        "sourceCount":  3,
+        "articles":  [
+                         "/article1.html",
+                         "/articles/first-briefing.html",
+                         "/articles/global-arctic-trade-routes.html"
+                     ]
+    }
+]
